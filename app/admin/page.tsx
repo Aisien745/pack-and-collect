@@ -166,7 +166,7 @@ export default function AdminDashboardPage() {
               Back to Student Storefront
             </Link>
             <h1 className="mt-1 text-2xl font-bold tracking-tight text-slate-900">
-              Operations &amp; Urbike Courier Dashboard
+              Operations &amp; Bpost Courier Dashboard
             </h1>
             <p className="text-xs text-slate-600">
               Manage locked 2-hour delivery slots, QR bag tags, and 48h deposit auto-refunds.
@@ -175,7 +175,7 @@ export default function AdminDashboardPage() {
 
           <div className="flex items-center gap-2 rounded-xl border border-emerald-200 bg-emerald-50 px-3.5 py-2 text-xs font-semibold text-emerald-900">
             <Bike className="h-4 w-4 text-emerald-600" />
-            <span>Urbike Cargo-Bike Partner: Active (15 kits/slot cap)</span>
+            <span>Bpost Cargo-Bike Partner: Active (15 kits/slot cap)</span>
           </div>
         </div>
 
@@ -183,7 +183,7 @@ export default function AdminDashboardPage() {
         <div className="grid gap-4 sm:grid-cols-4">
           <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
             <span className="text-xs font-medium text-slate-500">
-              Ready for Urbike Dispatch
+              Ready for Bpost Dispatch
             </span>
             <div className="mt-1 text-2xl font-bold text-slate-900">
               {pendingDeliveries} orders
@@ -269,7 +269,7 @@ export default function AdminDashboardPage() {
                 <tr>
                   <th className="px-4 py-3">Booking &amp; QR Tag</th>
                   <th className="px-4 py-3">Student &amp; Address</th>
-                  <th className="px-4 py-3">Locked Urbike Window</th>
+                  <th className="px-4 py-3">Locked Bpost Window</th>
                   <th className="px-4 py-3">Packages</th>
                   <th className="px-4 py-3">Deposit</th>
                   <th className="px-4 py-3">Status</th>

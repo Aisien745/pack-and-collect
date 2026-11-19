@@ -216,7 +216,7 @@ function CheckoutForm() {
                 className="mt-1 w-full rounded-xl border border-slate-300 px-3.5 py-2 text-sm focus:border-emerald-600 focus:outline-none"
               />
               <p className="mt-1 text-xs text-slate-500">
-                Urbike cargo-bike courier hands over your padded bag at the entrance and takes the rigid transport crate back.
+                Bpost cargo-bike courier hands over your padded bag at the entrance and takes the rigid transport crate back.
               </p>
             </div>
           )}
@@ -271,7 +271,7 @@ function CheckoutForm() {
           >
             <Lock className="h-4 w-4" />
             {isSubmitting
-              ? "Locking Your Urbike Slot..."
+              ? "Locking Your Bpost Slot..."
               : `Confirm Booking & Lock Slot (€${
                   paymentTiming === "upfront"
                     ? cart.totalDueToday.toFixed(2)
@@ -297,7 +297,7 @@ function CheckoutForm() {
                 <div className="space-y-1">
                   <div className="flex items-center gap-1.5 font-semibold text-slate-900">
                     <Bike className="h-4 w-4 text-emerald-600" />
-                    Urbike Doorstep Delivery ({postcode})
+                    Bpost Doorstep Delivery ({postcode})
                   </div>
                   <p>{zone?.name}</p>
                   <p className="font-medium text-emerald-800">

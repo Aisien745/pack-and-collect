@@ -476,7 +476,7 @@ export default function Storefront() {
                         }`}
                       >
                         <Bike className="h-3.5 w-3.5" />
-                        Urbike Delivery
+                        Bpost Delivery
                       </button>
                       <button
                         type="button"

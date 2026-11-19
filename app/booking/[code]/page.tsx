@@ -192,7 +192,7 @@ function BookingPortalContent() {
             </h2>
           </div>
           <p className="mt-1.5 text-xs leading-relaxed text-slate-600">
-            Wipe down kitchenware, pack everything into your foldable padded bag, and lock your 2-hour Urbike pickup window below.
+            Wipe down kitchenware, pack everything into your foldable padded bag, and lock your 2-hour Bpost pickup window below.
           </p>
 
           <div className="mt-4 space-y-3">
