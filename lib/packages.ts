@@ -4,10 +4,11 @@ export interface StarterPackage {
   slug: PackageSlug;
   name: string;
   tagline: string;
+  categoryLabel: string;
   priceEur: number;
   depositEur: number;
   isConsumable: boolean;
-  badge?: string;
+  imageUrl: string;
   items: string[];
 }
 
@@ -15,18 +16,20 @@ export const PACKAGES: StarterPackage[] = [
   {
     slug: "kitchen",
     name: "Kitchen Package",
-    tagline: "Cook & host from day one — packed in a padded divider bag",
+    tagline: "Everything you need to cook and eat at home.",
+    categoryLabel: "Kitchen essentials",
     priceEur: 59,
-    depositEur: 20,
+    depositEur: 25,
     isConsumable: false,
-    badge: "Break-Resistant Opal Glass",
+    imageUrl:
+      "https://images.unsplash.com/photo-1556911220-bff31c812dba?auto=format&fit=crop&w=800&q=80",
     items: [
       "1x Stainless steel frying pan (24 cm)",
       "1x Stainless steel saucepan with lid (2 L)",
       "2x Tempered opal glass dinner plates & 2x bowls",
       "2x Drinking glasses & 2x mugs",
       "16-piece stainless steel cutlery set",
-      "1x Sharp chef's knife, 1x paring knife & 2x cutting boards",
+      "1x Chef's knife, 1x paring knife & 2x cutting boards",
       "1x Spatula, 1x wooden spoon, 1x ladle & 1x colander",
       "2x Food containers, 2x tea towels & 1x oven glove",
     ],
@@ -34,27 +37,32 @@ export const PACKAGES: StarterPackage[] = [
   {
     slug: "bedroom",
     name: "Bedroom Package",
-    tagline: "Ready for Night 1 — thermal-sanitized 100% white cotton",
+    tagline: "A comfortable setup for a good night's sleep.",
+    categoryLabel: "Bedding essentials",
     priceEur: 69,
-    depositEur: 20,
+    depositEur: 25,
     isConsumable: false,
-    badge: "Most Popular",
+    imageUrl:
+      "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?auto=format&fit=crop&w=800&q=80",
     items: [
       "1x All-season duvet (140×200 cm)",
       "1x Firm pillow (50×60 cm)",
-      "1x 100% cotton duvet cover & pillowcase set",
-      "1x Fitted bed sheet (90×200 cm)",
+      "1x 100% white cotton duvet cover & pillowcase",
+      "1x Fitted sheet (90×200 cm)",
       "1x LED desk / bedside lamp + bulb",
-      "1x Foldable laundry bag & 5x clothes hangers",
+      "1x Foldable laundry bag & 5x hangers",
     ],
   },
   {
     slug: "bathroom",
     name: "Bathroom Package",
-    tagline: "High-GSM hotel-grade towels sealed after sanitization",
+    tagline: "The essential bathroom textiles for your stay.",
+    categoryLabel: "Bathroom essentials",
     priceEur: 35,
-    depositEur: 20,
+    depositEur: 15,
     isConsumable: false,
+    imageUrl:
+      "https://images.unsplash.com/photo-1620626011761-996317b8d101?auto=format&fit=crop&w=800&q=80",
     items: [
       "2x Large bath towels (70×140 cm)",
       "2x Hand towels (50×100 cm)",
@@ -64,12 +72,14 @@ export const PACKAGES: StarterPackage[] = [
   },
   {
     slug: "cleaning",
-    name: "Cleaning Kit (Keep It)",
-    tagline: "Day-1 consumables — outright purchase, no return needed",
+    name: "Cleaning Package",
+    tagline: "Keep your accommodation clean and tidy with ease.",
+    categoryLabel: "Cleaning essentials",
     priceEur: 10,
     depositEur: 0,
     isConsumable: true,
-    badge: "No Deposit",
+    imageUrl:
+      "https://images.unsplash.com/photo-1585421514738-01798e348b17?auto=format&fit=crop&w=800&q=80",
     items: [
       "2x Cleaning sponges & 2x microfiber cloths",
       "1x Multi-purpose cleaner (1 L)",
@@ -87,7 +97,6 @@ export interface CartSummary {
   depositTotal: number;
   totalDueToday: number;
   isCompleteBundle: boolean;
-  qualifiesForFreeDelivery: boolean;
 }
 
 export function calculateCart(
@@ -109,23 +118,21 @@ export function calculateCart(
     .filter((p) => p.isConsumable)
     .reduce((sum, p) => sum + p.priceEur, 0);
 
-  // €14 bundle discount when all 3 rental kits are chosen (€163 -> €149)
+  // €14 bundle discount when Kitchen + Bedroom + Bathroom are combined (€163 -> €149)
   const bundleDiscount = isCompleteBundle ? 14 : 0;
   const netRental = rentalSubtotal - bundleDiscount;
 
-  // Deposit capped at €35 for Complete Bundle, €20 per standalone rental kit
+  // Deposit capped at €45 for Complete Bundle (vs €65 separate)
   const rawDeposit = selected.reduce((sum, p) => sum + p.depositEur, 0);
-  const depositTotal = isCompleteBundle ? 35 : rawDeposit;
+  const depositTotal = isCompleteBundle ? 45 : rawDeposit;
 
-  // Free cargo-bike delivery for orders >= €50, or campus hub pickup
-  const orderMerchandiseTotal = netRental + consumableSubtotal;
-  const qualifiesForFreeDelivery = orderMerchandiseTotal >= 50;
+  const merchandiseTotal = netRental + consumableSubtotal;
   const deliveryFee =
-    deliveryMethod === "campus_hub" || qualifiesForFreeDelivery || orderMerchandiseTotal === 0
+    deliveryMethod === "campus_hub" || merchandiseTotal >= 50 || merchandiseTotal === 0
       ? 0
       : 8;
 
-  const totalDueToday = orderMerchandiseTotal + deliveryFee + depositTotal;
+  const totalDueToday = merchandiseTotal + deliveryFee + depositTotal;
 
   return {
     rentalSubtotal,
@@ -135,6 +142,5 @@ export function calculateCart(
     depositTotal,
     totalDueToday,
     isCompleteBundle,
-    qualifiesForFreeDelivery,
   };
 }
