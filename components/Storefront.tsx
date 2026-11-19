@@ -30,7 +30,6 @@ import {
   findZoneByPostcode,
 } from "../lib/zones";
 import {
-  BrandLogo,
   BrusselsSkyline,
   BundleBoxIllustration,
 } from "./BrandIllustrations";
@@ -95,17 +94,13 @@ export default function Storefront() {
       {/* 1. TOP NAVBAR */}
       <header className="sticky top-0 z-30 border-b border-slate-200/80 bg-white/95 backdrop-blur">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3.5 sm:px-6">
-          {/* Logo */}
-          <a href="#" className="flex items-center gap-2.5">
-            <BrandLogo className="h-10 w-10 shrink-0" />
-            <div className="leading-tight">
-              <span className="block text-base font-extrabold tracking-tight text-[#1B3B2B]">
-                Pack &amp;
-              </span>
-              <span className="block text-base font-extrabold tracking-tight text-[#1B3B2B]">
-                Collect
-              </span>
-            </div>
+{/* Logo */}
+<a href="#" className="flex items-center">
+            <img
+              src="/logo.png"
+              alt="Pack & Collect"
+              className="h-12 w-auto object-contain"
+            />
           </a>
 
           {/* Navigation Links */}
